@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import './CheckOut.css';
 
-function CheckoutPage({ movieName, ticketPrice,bookedSeat }) {
+function CheckoutPage({ movieName, ticketPrice, bookedSeat }) {
   const [numTickets, setNumTickets] = useState(1);
+  const [isPaymentSubmitted, setIsPaymentSubmitted] = useState(false);
   const convenienceFeeRate = 0.0175; // 1.75%
   const convenienceFee = bookedSeat * ticketPrice * convenienceFeeRate;
   const subtotal = bookedSeat * ticketPrice + convenienceFee;
@@ -14,6 +15,11 @@ function CheckoutPage({ movieName, ticketPrice,bookedSeat }) {
     } else {
       setNumTickets(Math.max(value, 1));
     }
+  };
+
+  const handlePaymentSubmit = (event) => {
+    event.preventDefault();
+    setIsPaymentSubmitted(true);
   };
 
   return (
@@ -32,7 +38,7 @@ function CheckoutPage({ movieName, ticketPrice,bookedSeat }) {
 
       <section>
         <h2>Payment</h2>
-        <form>
+        <form onSubmit={handlePaymentSubmit}>
           <label>
             First name:
             <input type="text" required />
@@ -55,9 +61,11 @@ function CheckoutPage({ movieName, ticketPrice,bookedSeat }) {
           </label>
           <button type="submit">Pay ${subtotal.toFixed(2)}</button>
         </form>
+        {isPaymentSubmitted && <p>Thank you for purchasing {bookedSeat} ticket(s) of {movieName}!</p>}
       </section>
     </div>
   );
 }
 
 export default CheckoutPage;
+
