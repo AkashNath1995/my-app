@@ -1,10 +1,11 @@
 import { useState } from 'react';
+import './CheckOut.css';
 
-function CheckoutPage({ movieName, ticketPrice }) {
+function CheckoutPage({ movieName, ticketPrice,bookedSeat }) {
   const [numTickets, setNumTickets] = useState(1);
   const convenienceFeeRate = 0.0175; // 1.75%
-  const convenienceFee = numTickets * ticketPrice * convenienceFeeRate;
-  const subtotal = numTickets * ticketPrice + convenienceFee;
+  const convenienceFee = bookedSeat * ticketPrice * convenienceFeeRate;
+  const subtotal = bookedSeat * ticketPrice + convenienceFee;
 
   const handleNumTicketsChange = (event) => {
     const value = parseInt(event.target.value, 10);
@@ -23,7 +24,7 @@ function CheckoutPage({ movieName, ticketPrice }) {
         <p>Price per ticket: ${ticketPrice.toFixed(2)}</p>
         <label>
           Number of tickets:
-          <input type="number" value={numTickets} onChange={handleNumTicketsChange} min="1" />
+          <input type="number" value={bookedSeat} onChange={handleNumTicketsChange} min="1" />
         </label>
         <p>Convenience fee: ${convenienceFee.toFixed(2)}</p>
         <h3>Subtotal: ${subtotal.toFixed(2)}</h3>

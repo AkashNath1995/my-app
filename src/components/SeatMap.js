@@ -1,7 +1,8 @@
 import React from 'react';
 import './SeatMap.css';
 
-const SeatMap = ({ seats, selectedSeats, handleSeatSelect }) => {
+
+const SeatMap = ({ seats, selectedSeats, handleSeatSelect,bookedSeat,setBookedSeat }) => {
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
   const handleSeatClick = (rowIndex, seatIndex) => {
@@ -9,7 +10,6 @@ const SeatMap = ({ seats, selectedSeats, handleSeatSelect }) => {
       handleSeatSelect(rowIndex, seatIndex);
     }
   };
-
   return (
     <div className="seat-map">
       {seats.map((row, rowIndex) => (
@@ -25,7 +25,13 @@ const SeatMap = ({ seats, selectedSeats, handleSeatSelect }) => {
                 ) && 'selected'
               }`}
               key={seatIndex}
-              onClick={() => handleSeatClick(rowIndex, seatIndex)}
+              onClick={(e) => {handleSeatClick(rowIndex, seatIndex)
+                if(!e.target.className.includes("selected")){
+                  setBookedSeat(bookedSeat+1)
+                }else{
+                  setBookedSeat(bookedSeat-1)
+                }
+              }}
             >
               {alphabet[rowIndex]}
               {seatIndex + 1}
