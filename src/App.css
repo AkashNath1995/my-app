@@ -1,38 +1,54 @@
-.App {
+
+body {
+  font-family: 'Helvetica Neue', sans-serif;
+  background-color: #f2f2f2;
+  overflow-x: hidden;
+}
+
+
+.container {
+  margin-top: 80px;
+}
+.no-results {
+  margin-left: 450px; 
   text-align: center;
+  color: #333;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border: 2px dashed #999;
+  padding: 25px;
+  background-color: #f8f8f8;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.modal {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
 }
 
-.App-link {
-  color: #61dafb;
+.modal .modal-content {
+  background-color: #fff;
+  padding: 20px;
+  width: 60%;
+  position: relative;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.modal .modal-content h3 {
+  font-size: 32px;
+  font-family: 'Helvetica Neue', sans-serif;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
 }
+
+

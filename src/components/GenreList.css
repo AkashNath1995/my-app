@@ -1,0 +1,26 @@
+.genre-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+    padding: 10px;
+  }
+.genre {
+    padding: 4px 8px;
+    font-size: 12px;
+    background-color: #222;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+  }
+  
+  .genre:hover {
+    background-color: #990000;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+    transform: translateY(-1px);
+  }
+  
