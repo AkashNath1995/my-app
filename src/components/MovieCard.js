@@ -11,6 +11,7 @@ const MovieCard = ({ movie, handleMovieClick }) => {
       <div className='movie-info'>
         <h3>{movie.title}</h3>
         <span>{movie.vote_average}</span>
+        <p>Original Language: {movie.original_language}</p>
       </div>
     </div>
   );

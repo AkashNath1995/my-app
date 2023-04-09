@@ -6,6 +6,7 @@ import SearchBar from './components/SearchBar';
 import MovieModal from './components/MovieModal';
 import { useAuth0 } from "@auth0/auth0-react";
 
+
 function App() {
   const apiKey = '5cffd780f1e1d2c34e3d6a3b85e2bfeb';
   const [movies, setMovies] = useState([]);
@@ -17,7 +18,6 @@ function App() {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [loading, setLoading] = useState(true);
   const loadingImg = './loading.gif';
-
   const handleCloseModal = () => {
     setSelectedMovie(null);
   };
@@ -101,13 +101,14 @@ function App() {
     console.log(movie);
     
     handleMovieSelect(movie);
+    console.log(movie)
   };
 
   return (
     <div className='App'>
       <nav>
         <div className='logo'>
-          <a href='/'>Movie App</a>
+          <a href='/'>Happy Hour Movie</a>
         </div>
         <div className='search'>
                     <SearchBar setSearchTerm={setSearchTerm} />

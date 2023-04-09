@@ -17,8 +17,9 @@ nav a {
   text-decoration: none;
 }
 
-nav img {
-  height: 2rem;
+img {
+  width: 200px; /* set the width to 50 pixels */
+  height: 200px; /* set the height to 50 pixels */
 }
 
 .search-bar {

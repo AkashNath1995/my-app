@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './CheckOut.css';
 
 function CheckoutPage({ movieName, ticketPrice, bookedSeat }) {
-  const [numTickets, setNumTickets] = useState(1);
+  const [setNumTickets] = useState(1);
   const [isPaymentSubmitted, setIsPaymentSubmitted] = useState(false);
   const convenienceFeeRate = 0.0175; // 1.75%
   const convenienceFee = bookedSeat * ticketPrice * convenienceFeeRate;
@@ -27,13 +27,13 @@ function CheckoutPage({ movieName, ticketPrice, bookedSeat }) {
       <section>
         <h2>Summary</h2>
         <p>Movie: {movieName}</p>
-        <p>Price per ticket: ${ticketPrice.toFixed(2)}</p>
+        <p>Price per ticket: ₹{ticketPrice.toFixed(2)}</p>
         <label>
           Number of tickets:
           <input type="number" value={bookedSeat} onChange={handleNumTicketsChange} min="1" />
         </label>
-        <p>Convenience fee: ${convenienceFee.toFixed(2)}</p>
-        <h3>Subtotal: ${subtotal.toFixed(2)}</h3>
+        <p>Convenience fee: ₹{convenienceFee.toFixed(2)}</p>
+        <h3>Subtotal: ₹{subtotal.toFixed(2)}</h3>
       </section>
 
       <section>
@@ -56,12 +56,12 @@ function CheckoutPage({ movieName, ticketPrice, bookedSeat }) {
             <select>
               <option value="credit">Credit card</option>
               <option value="debit">Debit card</option>
-              <option value="paypal">PayPal</option>
+              <option value="upi">UPI</option>
             </select>
           </label>
-          <button type="submit">Pay ${subtotal.toFixed(2)}</button>
+          <button type="submit">Pay ₹{subtotal.toFixed(2)}</button>
         </form>
-        {isPaymentSubmitted && <p>Thank you for purchasing {bookedSeat} ticket(s) of {movieName}!</p>}
+        {isPaymentSubmitted && <p>Thank you for purchasing {bookedSeat} ticket(s) of {movieName} !</p>}
       </section>
     </div>
   );

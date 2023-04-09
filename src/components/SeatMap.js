@@ -41,7 +41,9 @@ const SeatMap = ({ seats, selectedSeats, handleSeatSelect,bookedSeat,setBookedSe
       ))}
       <div className="screen">
       <p>Screen</p>
+
     </div>
+    
     </div>
     
   );

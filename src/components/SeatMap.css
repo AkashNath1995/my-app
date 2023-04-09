@@ -17,7 +17,7 @@
     font-weight: bold;
     text-align: center;
     width: 36px;
-    height: 36px;
+    height: 30px;
     margin-right: 10px;
     margin-left: 10px;
     border: none;
@@ -129,12 +129,14 @@
   .screen {
     background-color: #53def6;
     color: #301bb9f6;
-    height: 60px;
+    height: 30px;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 40px;
+    border-radius: 50px; /* adjust this value to control the degree of curvature */
   }
+  
   
   

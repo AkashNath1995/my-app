@@ -4,7 +4,7 @@ import './NavBar.css';
 function NavBar() {
   return (
        <Link to="/">
-        <img src="/logo.png" alt="Logo" />
+        <img src="https://static.vecteezy.com/system/resources/previews/006/230/795/original/film-logo-initial-letter-h-movie-logo-design-template-element-eps10-vector.jpg" alt="Logo" />
       </Link> 
   );
 }
