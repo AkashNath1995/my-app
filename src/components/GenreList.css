@@ -15,12 +15,12 @@
     border-radius: 3px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 1px 3px rgba(244, 229, 229, 0.694);
   }
   
   .genre:hover {
     background-color: #990000;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 2px 5px rgb(255, 255, 255);
     transform: translateY(-1px);
   }
   

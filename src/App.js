@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import MovieCard from './components/MovieCard';
 import GenreList from './components/GenreList';
-import SearchBar from './components/SearchBar';
 import MovieModal from './components/MovieModal';
-import { useAuth0 } from "@auth0/auth0-react";
+import { FaFacebookF } from 'react-icons/fa';
+import { AiOutlineInstagram, AiFillTwitterCircle } from 'react-icons/ai';
+import { SiLinkedin } from 'react-icons/si';
+
 
 
 function App() {
@@ -13,7 +15,6 @@ function App() {
   const [genres, setGenres] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [selectedGenre, setSelectedGenre] = useState(null);
-  const [searchTerm, setSearchTerm] = useState('');
   const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -21,7 +22,6 @@ function App() {
   const handleCloseModal = () => {
     setSelectedMovie(null);
   };
-  const { loginWithRedirect,isAuthenticated,logout } = useAuth0();
 
   
 
@@ -48,31 +48,6 @@ function App() {
     fetchNowPlayingMovies();
     fetchGenres();
   }, []);
-
-  useEffect(() => {
-    const timerId = setTimeout(() => {
-      setDebouncedSearchTerm(searchTerm);
-    }, 500);
-
-    return () => {
-      clearTimeout(timerId);
-    };
-  }, [searchTerm]);
-
-  useEffect(() => {
-    const fetchSearchResults = async () => {
-      if (debouncedSearchTerm) {
-        const response = await fetch(
-          `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${debouncedSearchTerm}`
-        );
-        const data = await response.json();
-        setFilteredMovies(data.results);
-      }
-    };
-  
-    fetchSearchResults();
-  }, [debouncedSearchTerm]);
-  
 
   const handleGenreSelect = (genre) => {
     setSelectedGenre(genre);
@@ -110,23 +85,6 @@ function App() {
         <div className='logo'>
           <a href='/'>Happy Hour Movie</a>
         </div>
-        <div className='search'>
-                    <SearchBar setSearchTerm={setSearchTerm} />
-          <div className='favorites'>
-            <a href='/wishlist'>
-              <i className='fas fa-heart'></i>
-            </a>
-          </div>
-        </div>
-        {
-        isAuthenticated ? (<div className="logout">
-        <button onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>
-        Log Out
-      </button>
-        </div>):(<div className='login'>
-        <button onClick={() => loginWithRedirect()}>Log In</button>
-        </div>)
-      }
       </nav>
       <div className="container">
         <div className="genres">
@@ -155,7 +113,30 @@ function App() {
 
         {selectedMovie && <MovieModal movie={selectedMovie} handleClose={handleCloseModal} />}
       </div>
-      
+      <footer>
+  <div className="footer-content">
+    <div className="footer-info">
+      <p>© 2023 Your App. All rights reserved.</p>
+      <p>Contact: example@example.com</p>
+      <p>Address: 123 Main St, City, Country</p>
+    </div>
+    <div className="social-icons">
+      <a href="https://www.facebook.com">
+        <FaFacebookF />
+      </a>
+      <a href="https://www.instagram.com">
+        <AiOutlineInstagram />
+      </a>
+      <a href="https://www.twitter.com">
+        <AiFillTwitterCircle />
+      </a>
+      <a href="https://www.linkedin.com">
+        <SiLinkedin />
+      </a>
+    </div>
+  </div>
+</footer>
+
     </div>
 
   );
