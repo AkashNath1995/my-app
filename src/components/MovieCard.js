@@ -12,6 +12,7 @@ const MovieCard = ({ movie, handleMovieClick }) => {
         <h3>{movie.title}</h3>
         <span>{movie.vote_average}</span>
         <p>Original Language: {movie.original_language}</p>
+        <p>Released:{movie.release_date}</p>
       </div>
     </div>
   );
