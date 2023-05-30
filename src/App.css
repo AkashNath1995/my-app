@@ -82,7 +82,7 @@ footer {
 
 .footer-content {
   display: flex;
-  justify-content: space-between;
+  justify-content:flex-start;
   align-items: center;
   flex-wrap: wrap;
 }
@@ -108,3 +108,24 @@ footer {
   font-size: 30px;
   color: rgb(54, 194, 143);
 }
+
+.additional-info {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.additional-info p {
+  margin: 5px 10px;
+  font-size: 14px;
+  text-decoration: none;
+  color: #e61111;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.additional-info p:hover {
+  color: rgb(54, 194, 143);
+  font-weight: bold;
+}
+

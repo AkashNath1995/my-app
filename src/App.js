@@ -134,6 +134,10 @@ function App() {
         <SiLinkedin />
       </a>
     </div>
+    <div className="additional-info">
+      <p>Privacy Policy</p>
+      <p>Terms of Service</p>
+    </div>
   </div>
 </footer>
 
