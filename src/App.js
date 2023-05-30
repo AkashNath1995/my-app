@@ -7,8 +7,6 @@ import { FaFacebookF } from 'react-icons/fa';
 import { AiOutlineInstagram, AiFillTwitterCircle } from 'react-icons/ai';
 import { SiLinkedin } from 'react-icons/si';
 
-
-
 function App() {
   const apiKey = '5cffd780f1e1d2c34e3d6a3b85e2bfeb';
   const [movies, setMovies] = useState([]);
@@ -22,8 +20,6 @@ function App() {
   const handleCloseModal = () => {
     setSelectedMovie(null);
   };
-
-  
 
   useEffect(() => {
     const fetchNowPlayingMovies = async () => {
@@ -68,81 +64,130 @@ function App() {
       `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${apiKey}&append_to_response=videos`
     );
     const data = await response.json();
-    let seatMap=[[0,1,1,1,1],[0,1,0,1,0],[1,0,1,1,0],[1,1,1,1,0],[1,0,0,1,0],[1,1,1,1,1],[1,0,0,1,0],[0,1,0,1,0],[1,1,1,1,1],[1,1,1,1,0],[0,0,0,0,0],[1,0,1,1,0],[0,1,0,1,0],[1,1,1,0,0],[0,0,1,1,0],[0,0,0,1,0],[0,0,0,0,0],[1,1,0,1,0],[1,1,1,0,0]];
-    data.seats=seatMap;
+    let seatMap = [
+      [0, 1, 1, 1, 1],
+      [0, 1, 0, 1, 0],
+      [1, 0, 1, 1, 0],
+      [1, 1, 1, 1, 0],
+      [1, 0, 0, 1, 0],
+      [1, 1, 1, 1, 1],
+      [1, 0, 0, 1, 0],
+      [0, 1, 0, 1, 0],
+      [1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 0],
+      [0, 0, 0, 0, 0],
+      [1, 0, 1, 1, 0],
+      [0, 1, 0, 1, 0],
+      [1, 1, 1, 0, 0],
+      [0, 0, 1, 1, 0],
+      [0, 0, 0, 1, 0],
+      [0, 0, 0, 0, 0],
+      [1, 1, 0, 1, 0],
+      [1, 1, 1, 0, 0],
+    ];
+    data.seats = seatMap;
     setSelectedMovie(data);
   };
+
   const handleMovieClick = (movie) => {
-    console.log(movie);
-    
-    handleMovieSelect(movie);
-    console.log(movie)
+    if (isAuthenticated) {
+      handleMovieSelect(movie);
+    } else {
+      alert('Please login to view movie details.');
+    }
+  };
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const handleLogin = () => {
+    setIsAuthenticated(true);
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
   };
 
   return (
-    <div className='App'>
+    <div className="App">
       <nav>
-        <div className='logo'>
-          <a href='/'>Happy Hour Movie</a>
+        <div className="logo">
+          <a href="/">Happy Hour Movie</a>
+          <div className="log">
+            {isAuthenticated ? (
+              <button className="login" onClick={handleLogout}>
+                Logout
+              </button>
+            ) : (
+              <button className="login" onClick={handleLogin}>
+                Login
+              </button>
+            )}
+          </div>
         </div>
       </nav>
+
       <div className="container">
         <div className="genres">
           <h2>Genres</h2>
           <GenreList genres={genres} handleGenreSelect={handleGenreSelect} />
         </div>
         <div className="movies">
-  <h2>Now Playing</h2><br/>
-  {loading ? (
-    <div className="loading">
-      <img src={loadingImg} alt="Loading" />
-    </div>
-  ) : (
-    <>
-      {selectedGenre 
-        ? filteredMovies.map((movie) => (
-            <MovieCard key={movie.id} movie={movie} handleMovieClick={handleMovieClick} />
-          ))
-        : movies.map((movie) => (
-            <MovieCard key={movie.id} movie={movie} handleMovieClick={handleMovieClick} />
-          ))
-      }
-    </>
-  )}
-</div>
+          <h2>Now Playing</h2>
+          <br />
+          {loading ? (
+            <div className="loading">
+              <img src={loadingImg} alt="Loading" />
+            </div>
+          ) : (
+            <>
+              {selectedGenre ? (
+                filteredMovies.map((movie) => (
+                  <MovieCard
+                    key={movie.id}
+                    movie={movie}
+                    handleMovieClick={handleMovieClick}
+                  />
+                ))
+              ) : (
+                movies.map((movie) => (
+                  <MovieCard
+                    key={movie.id}
+                    movie={movie}
+                    handleMovieClick={handleMovieClick}
+                  />
+                ))
+              )}
+            </>
+          )}
+        </div>
 
         {selectedMovie && <MovieModal movie={selectedMovie} handleClose={handleCloseModal} />}
       </div>
       <footer>
-  <div className="footer-content">
-    <div className="footer-info">
-      <p>© 2023 Your App. All rights reserved.</p>
-      <p>Contact: example@example.com</p>
-      <p>Address: 123 Main St, City, Country</p>
+        <div className="footer-content">
+          <div className="footer-info">
+            <p>© 2023 Your App. All rights reserved.</p>
+            <p>Contact: example@example.com</p>
+            <p>Address: 123 Main St, City, Country</p>
+          </div>
+          <div className="social-icons">
+            <a href="https://www.facebook.com">
+              <FaFacebookF />
+            </a>
+            <a href="https://www.instagram.com">
+              <AiOutlineInstagram />
+            </a>
+            <a href="https://www.twitter.com">
+              <AiFillTwitterCircle />
+            </a>
+            <a href="https://www.linkedin.com">
+              <SiLinkedin />
+            </a>
+          </div>
+        </div>
+      </footer>
     </div>
-    <div className="social-icons">
-      <a href="https://www.facebook.com">
-        <FaFacebookF />
-      </a>
-      <a href="https://www.instagram.com">
-        <AiOutlineInstagram />
-      </a>
-      <a href="https://www.twitter.com">
-        <AiFillTwitterCircle />
-      </a>
-      <a href="https://www.linkedin.com">
-        <SiLinkedin />
-      </a>
-    </div>
-    <div className="additional-info">
-      <p>Privacy Policy</p>
-      <p>Terms of Service</p>
-    </div>
-  </div>
-</footer>
-
-    </div>
-
   );
 }
+
 export default App;
