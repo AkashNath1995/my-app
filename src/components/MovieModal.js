@@ -3,7 +3,7 @@ import './MovieModal.css';
 import SeatSelection from './SeatSelection';
 
 const MovieModal = ({ movie, handleClose }) => {
-  const { title, overview, poster_path, seats } = movie;
+  const { title, overview, poster_path } = movie;
   const [showSeatSelection, setShowSeatSelection] = useState(false);
 
   const handleBookNow = () => {
