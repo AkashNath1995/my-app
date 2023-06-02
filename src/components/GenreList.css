@@ -23,3 +23,9 @@
     box-shadow: 0px 2px 5px rgb(255, 255, 255);
     transform: translateY(-1px);
   }
+
+  .genre.selected {
+    /* Styles for selected genre */
+    background-color: white;
+    color: red;
+  }
