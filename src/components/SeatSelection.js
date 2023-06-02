@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useState } from 'react';
 import SeatMap from './SeatMap';
 import CheckoutPage from '../CheckOut';
 import './SeatSelection.css';
