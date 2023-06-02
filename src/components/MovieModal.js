@@ -32,9 +32,6 @@ const MovieModal = ({ movie, handleClose }) => {
           <p>{overview}</p>
           <button onClick={handleBookNow}>Book Now</button>
         </div>
-        <button className='modal-close' onClick={handleClose}>
-          X
-        </button>
         {showSeatSelection && (
         <SeatSelection movie={movie} handleClose={() => setShowSeatSelection(false)} />
       )}
