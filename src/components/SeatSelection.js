@@ -39,7 +39,6 @@ const [bookedSeat,setBookedSeat]=useState(0)
       <h2>{title} - Select Seats</h2>
       <SeatMap seats={seats} selectedSeats={selectedSeats} handleSeatSelect={handleSeatSelect} bookedSeat={bookedSeat} setBookedSeat={setBookedSeat}/>
       <div className="button-container">
-        <button onClick={handleClose}>Cancel</button>
         <button disabled={selectedSeats.length === 0} onClick={handleBookNow}>Pay Now</button>
       </div>
       {showCheckout && <CheckoutPage movieName={title} ticketPrice={ticketPrice} onCancel={handleCheckoutCancel} bookedSeat={bookedSeat}/>}

@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import './CheckOut.css';
 
 function CheckoutPage({ movieName, ticketPrice, bookedSeat }) {
-  const [setNumTickets] = useState(1);
+  const [numTickets, setNumTickets] = useState(1);
   const [isPaymentSubmitted, setIsPaymentSubmitted] = useState(false);
   const convenienceFeeRate = 0.0175; // 1.75%
   const convenienceFee = bookedSeat * ticketPrice * convenienceFeeRate;
@@ -22,6 +22,10 @@ function CheckoutPage({ movieName, ticketPrice, bookedSeat }) {
     setIsPaymentSubmitted(true);
   };
 
+  const handleReloadPage = () => {
+    window.location.reload();
+  };
+
   return (
     <div>
       <section>
@@ -30,7 +34,7 @@ function CheckoutPage({ movieName, ticketPrice, bookedSeat }) {
         <p>Price per ticket: ₹{ticketPrice.toFixed(2)}</p>
         <label>
           Number of tickets:
-          <input type="number" value={bookedSeat} onChange={handleNumTicketsChange} min="1" />
+          <input type="number" value={numTickets} onChange={handleNumTicketsChange} min="1" />
         </label>
         <p>Convenience fee: ₹{convenienceFee.toFixed(2)}</p>
         <h3>Subtotal: ₹{subtotal.toFixed(2)}</h3>
@@ -61,11 +65,16 @@ function CheckoutPage({ movieName, ticketPrice, bookedSeat }) {
           </label>
           <button type="submit">Pay ₹{subtotal.toFixed(2)}</button>
         </form>
-        {isPaymentSubmitted && <p>Thank you for purchasing {bookedSeat} ticket(s) of {movieName} !</p>}
+        
       </section>
+      {isPaymentSubmitted && (
+          <div className="popup">
+            <p className="success-message">Thank you for purchasing {numTickets} ticket(s) of {movieName}!</p>
+            
+          </div>
+        )}
     </div>
   );
 }
 
 export default CheckoutPage;
-

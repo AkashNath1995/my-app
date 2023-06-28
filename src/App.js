@@ -154,12 +154,17 @@ function App() {
     const sortedMovies = [...filteredMovies].sort((a, b) => {
       if (sortOrder === 'highToLow') {
         return b.vote_average - a.vote_average;
-      } else {
+      } else if (sortOrder === 'lowToHigh') {
         return a.vote_average - b.vote_average;
+      } else if (sortOrder === 'newToOld') {
+        return new Date(b.release_date) - new Date(a.release_date);
+      } else if (sortOrder === 'oldToNew') {
+        return new Date(a.release_date) - new Date(b.release_date);
       }
     });
     setFilteredMovies(sortedMovies);
   }
+  
 
   return (
     <div className="App">
@@ -172,9 +177,7 @@ function App() {
             <button className="logout-home" onClick={handleLogout}>
               Logout
             </button>
-            <button className="delete-home" onClick={handleDeleteAccount}>
-              Delete Account
-            </button>
+           
           </div>
         ) : (
           <Link className="login-home" to="/login">
@@ -193,9 +196,13 @@ function App() {
           <div className="sort-dropdown">
             <label htmlFor="sort-order">Sorting:</label>
             <select id="sort-order" onChange={handleSortOrderChange}>
-              <option value="highToLow">High to Low</option>
-              <option value="lowToHigh">Low to High</option>
+              <option value="choose" disabled selected hidden >Choose a option</option>
+              <option value="highToLow">Rating: High to Low</option>
+              <option value="lowToHigh">Rating: Low to High</option>
+              <option value="newToOld">Release Date: New to Old</option>
+              <option value="oldToNew">Release Date: Old to New</option>
             </select>
+
           </div>
           {loading ? (
             <p>Loading...</p>
@@ -231,6 +238,20 @@ function App() {
           <SiLinkedin className="icon" />
         </div>
         <p className='footer-para'>&copy; 2023 Movie App. All rights reserved.</p>
+        {user ? (
+          <div  className='log-container'>
+            <button className="delete-home" onClick={handleDeleteAccount}>
+              Delete Account
+            </button>
+           
+          </div>
+        ) : (
+          <Link className="login-home" to="/login">
+            Login
+          </Link>
+        )}
+        
+
       </footer>
     </div>
   );

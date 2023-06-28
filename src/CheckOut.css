@@ -2,12 +2,12 @@
 
 section {
     margin: 2rem auto;
-    padding: 1.5rem;
+    padding: 2rem;
     border: 1px solid #ddd;
     border-radius: 5px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     background-color: #f8f8f8;
-    width: 80%;
+    width: 100%;
     max-width: 800px;
   }
   
@@ -45,8 +45,7 @@ section {
     box-sizing: border-box;
   }
   
-  section input[type='submit'],
-  section button[type='submit'] {
+  section input[type='submit']{
     margin-top: 2rem;
     padding: 0.75rem 1.5rem;
     background-color: #4CAF50;
@@ -59,21 +58,32 @@ section {
     text-transform: uppercase;
     letter-spacing: 2px;
   }
+
+  section button[type='submit'] {
+    margin-top: 2rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-left: 30%;
+  }
   
   section input[type='submit']:hover,
   section button[type='submit']:hover {
     background-color: #3e8e41;
   }
   
-  section p.success-message {
-    margin-top: 2rem;
-    font-size: 1.5rem;
-    font-weight: bold;
+  .success-message {
     color: #4CAF50;
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    font-size: smaller;
   }
+
   
   /* Media Queries */
 

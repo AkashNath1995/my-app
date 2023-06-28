@@ -18,6 +18,10 @@ const MovieModal = ({ movie, handleCloseModal }) => {
     };
   }, []);
 
+  const handleRefreshPage = () => {
+    window.location.reload();
+  };
+
   return (
     <div className="modal-overlay" onClick={handleCloseModal}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
@@ -33,6 +37,7 @@ const MovieModal = ({ movie, handleCloseModal }) => {
         {showSeatSelection && (
           <SeatSelection movie={movie} handleClose={handleCloseModal} />
         )}
+        <button className="return" onClick={handleRefreshPage}>Home</button>
       </div>
     </div>
   );
