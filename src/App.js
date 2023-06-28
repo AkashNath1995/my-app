@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import './App.css';
 import MovieCard from './components/MovieCard';
 import GenreList from './components/GenreList';
@@ -6,6 +7,21 @@ import MovieModal from './components/MovieModal';
 import { FaFacebookF } from 'react-icons/fa';
 import { AiOutlineInstagram, AiFillTwitterCircle } from 'react-icons/ai';
 import { SiLinkedin } from 'react-icons/si';
+import { initializeApp } from 'firebase/app';
+import { getAuth, onAuthStateChanged, signOut, deleteUser } from 'firebase/auth';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAcR6ERZ9JfFCKVpql5Q5iG_lNCGw9v15c",
+  authDomain: "happy-hour-movie-booking.firebaseapp.com",
+  projectId: "happy-hour-movie-booking",
+  storageBucket: "happy-hour-movie-booking.appspot.com",
+  messagingSenderId: "431283345802",
+  appId: "1:431283345802:web:f896933329bfc4ffa39073",
+  measurementId: "G-PGZK6NCY6Y"
+};
+
+initializeApp(firebaseConfig);
+const auth = getAuth();
 
 function App() {
   const apiKey = '5cffd780f1e1d2c34e3d6a3b85e2bfeb';
@@ -13,10 +29,26 @@ function App() {
   const [genres, setGenres] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [selectedGenre, setSelectedGenre] = useState(null);
-  const [debouncedSearchTerm] = useState('');
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [loading, setLoading] = useState(true);
-  const loadingImg = './loading.gif';
+  const [user, setUser] = useState(null);
+  const history = useHistory();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in
+        setUser(user);
+      } else {
+        // User is signed out
+        setUser(null);
+      }
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
   const handleCloseModal = () => {
     setSelectedMovie(null);
   };
@@ -27,7 +59,6 @@ function App() {
         `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=1`
       );
       const data = await response.json();
-      console.log(data);
       setMovies(data.results);
       setFilteredMovies(data.results);
       setLoading(false);
@@ -49,11 +80,8 @@ function App() {
     setSelectedGenre(genre);
     let filtered = movies;
     if (genre) {
-      filtered = filtered.filter((movie) => movie.genre_ids.includes(genre.id));
-    }
-    if (debouncedSearchTerm) {
-      filtered = filtered.filter(
-        (movie) => movie.title.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
+      filtered = filtered.filter((movie) =>
+        movie.genre_ids.includes(genre.id)
       );
     }
     setFilteredMovies(filtered);
@@ -79,49 +107,80 @@ function App() {
       [1, 0, 1, 1, 0],
       [0, 1, 0, 1, 0],
       [1, 1, 1, 0, 0],
+      [1, 0, 0, 1, 0],
       [0, 0, 1, 1, 0],
+      [1, 0, 1, 1, 0],
+      [1, 1, 1, 1, 0],
       [0, 0, 0, 1, 0],
       [1, 1, 1, 1, 0],
+      [1, 1, 0, 1, 0]
     ];
     data.seats = seatMap;
     setSelectedMovie(data);
   };
 
   const handleMovieClick = (movie) => {
-    if (isAuthenticated) {
+    if (user) {
       handleMovieSelect(movie);
     } else {
       alert('Please login to view movie details.');
     }
   };
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  const handleLogin = () => {
-    setIsAuthenticated(true);
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      // Logout successful
+      console.log('User logged out');
+    } catch (error) {
+      // Logout failed
+      console.error(error.message);
+    }
   };
 
-  const handleLogout = () => {
-    setIsAuthenticated(false);
+  const handleDeleteAccount = async () => {
+    try {
+      await deleteUser(auth.currentUser);
+      // Account deletion successful
+      console.log('User account deleted');
+    } catch (error) {
+      // Account deletion failed
+      console.error(error.message);
+    }
   };
+
+  function handleSortOrderChange(e) {
+    const sortOrder = e.target.value;
+    const sortedMovies = [...filteredMovies].sort((a, b) => {
+      if (sortOrder === 'highToLow') {
+        return b.vote_average - a.vote_average;
+      } else {
+        return a.vote_average - b.vote_average;
+      }
+    });
+    setFilteredMovies(sortedMovies);
+  }
 
   return (
     <div className="App">
-      <nav>
-        <div className="logo">
-          <a href="/">Happy Hour Movie</a>
-          <div className="log">
-            {isAuthenticated ? (
-              <button className="login" onClick={handleLogout}>
-                Logout
-              </button>
-            ) : (
-              <button className="login" onClick={handleLogin}>
-                Login
-              </button>
-            )}
+      <nav className="navbar">
+      <Link to="/" className="logo" onClick={() => window.location.reload()}>
+         Happy Hour Movie App
+      </Link>
+        {user ? (
+          <div  className='log-container'>
+            <button className="logout-home" onClick={handleLogout}>
+              Logout
+            </button>
+            <button className="delete-home" onClick={handleDeleteAccount}>
+              Delete Account
+            </button>
           </div>
-        </div>
+        ) : (
+          <Link className="login-home" to="/login">
+            Login
+          </Link>
+        )}
       </nav>
 
       <div className="container">
@@ -131,58 +190,47 @@ function App() {
         </div>
         <div className="movies">
           <h2>Now Playing</h2>
-          <br />
+          <div className="sort-dropdown">
+            <label htmlFor="sort-order">Sorting:</label>
+            <select id="sort-order" onChange={handleSortOrderChange}>
+              <option value="highToLow">High to Low</option>
+              <option value="lowToHigh">Low to High</option>
+            </select>
+          </div>
           {loading ? (
-            <div className="loading">
-              <img src={loadingImg} alt="Loading" />
-            </div>
+            <p>Loading...</p>
           ) : (
             <>
-              {selectedGenre ? (
-                filteredMovies.map((movie) => (
-                  <MovieCard
-                    key={movie.id}
-                    movie={movie}
-                    handleMovieClick={handleMovieClick}
-                  />
-                ))
+              {filteredMovies.length > 0 ? (
+                <div className="movie-grid">
+                  {filteredMovies.map((movie) => (
+                    <MovieCard
+                      key={movie.id}
+                      movie={movie}
+                      handleMovieClick={handleMovieClick}
+                    />
+                  ))}
+                </div>
               ) : (
-                movies.map((movie) => (
-                  <MovieCard
-                    key={movie.id}
-                    movie={movie}
-                    handleMovieClick={handleMovieClick}
-                  />
-                ))
+                <p>No movies found.</p>
               )}
             </>
           )}
         </div>
-
-        {selectedMovie && <MovieModal movie={selectedMovie} handleClose={handleCloseModal} />}
       </div>
-      <footer>
-        <div className="footer-content">
-          <div className="footer-info">
-            <p>© 2023 Your App. All rights reserved.</p>
-            <p>Contact: example@example.com</p>
-            <p>Address: 123 Main St, City, Country</p>
-          </div>
-          <div className="social-icons">
-            <a href="https://www.facebook.com">
-              <FaFacebookF />
-            </a>
-            <a href="https://www.instagram.com">
-              <AiOutlineInstagram />
-            </a>
-            <a href="https://www.twitter.com">
-              <AiFillTwitterCircle />
-            </a>
-            <a href="https://www.linkedin.com">
-              <SiLinkedin />
-            </a>
-          </div>
+
+      {selectedMovie && (
+        <MovieModal movie={selectedMovie} handleCloseModal={handleCloseModal} />
+      )}
+
+      <footer className='footer'>
+        <div className="footer-icons">
+          <FaFacebookF className="icon" />
+          <AiOutlineInstagram className="icon" />
+          <AiFillTwitterCircle className="icon" />
+          <SiLinkedin className="icon" />
         </div>
+        <p className='footer-para'>&copy; 2023 Movie App. All rights reserved.</p>
       </footer>
     </div>
   );

@@ -36,3 +36,58 @@
     cursor: not-allowed;
   }
   
+  /* Media Queries */
+
+/* For screens smaller than 576px */
+@media (max-width: 575px) {
+  .seat-selection {
+    font-size: 18px;
+    padding: 10px;
+  }
+
+  .button-container {
+    margin-top: 10px;
+  }
+
+  .button-container button {
+    font-size: 16px;
+    padding: 8px 16px;
+    margin-right: 6px;
+  }
+}
+
+/* For screens smaller than 768px */
+@media (max-width: 767px) {
+  .seat-selection {
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  .button-container {
+    margin-top: 10px;
+  }
+
+  .button-container button {
+    font-size: 14px;
+    padding: 6px 12px;
+    margin-right: 6px;
+  }
+}
+
+/* For screens smaller than 992px */
+@media (max-width: 991px) {
+  .seat-selection {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .button-container {
+    margin-top: 10px;
+  }
+
+  .button-container button {
+    font-size: 12px;
+    padding: 4px 8px;
+    margin-right: 4px;
+  }
+}

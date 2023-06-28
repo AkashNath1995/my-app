@@ -29,3 +29,25 @@
     background-color: white;
     color: red;
   }
+
+  /* Media Queries */
+
+/* For screens smaller than 768px */
+@media (max-width: 767px) {
+  .genre-list {
+    justify-content: center;
+  }
+}
+
+/* For screens smaller than 576px */
+@media (max-width: 575px) {
+  .genre-list {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .genre {
+    margin-bottom: 10px;
+  }
+}
+

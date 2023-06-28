@@ -51,13 +51,9 @@ body {
   color: #333;
 }
 
-.logo {
-  font-size: 2rem;
-  font-weight: bold;
-  text-align: center;
-}
 
-.logo a {
+
+.logo  {
   font-size: 2rem;
   text-decoration: none;
   color: #fa1111;
@@ -65,7 +61,7 @@ body {
 }
 
 
-.logo a:hover {
+.logo :hover {
   letter-spacing: 15px;
   opacity: 1;
 }
@@ -74,71 +70,40 @@ body {
   color: white;
 }
 
-footer {
-  background-color: #222;
-  color: #fff;
+.footer {
+  background-color: #f5f5f5;
   padding: 20px;
+  text-align: center;
 }
 
-.footer-content {
-  display: flex;
-  justify-content:flex-start;
-  align-items: center;
-  flex-wrap: wrap;
+.footer-icons {
+  margin-bottom: 10px;
 }
 
-.footer-info {
-  flex: 1;
-}
-
-.footer-info p {
-  margin: 5px 0;
-}
-
-.social-icons a {
-  color: rgb(236, 61, 61);
+.icon {
+  font-size: 24px;
   margin-right: 10px;
-  font-size: 20px;
-  text-decoration: none;
-  padding-left: 20px;
-  transition: 0.6s;
-}
-
-.social-icons a:hover {
-  font-size: 30px;
-  color: rgb(54, 194, 143);
-}
-
-.additional-info {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.additional-info p {
-  margin: 5px 10px;
-  font-size: 14px;
-  text-decoration: none;
-  color: #e61111;
+  color: #333;
   cursor: pointer;
-  transition: color 0.3s;
 }
 
-.additional-info p:hover {
-  color: rgb(54, 194, 143);
-  font-weight: bold;
+.footer-para {
+  font-size: 14px;
+  color: #888;
 }
 
 
-.log {
+
+
+.login-home,.logout-home {
   position: absolute;
   top: 10px;
   right: 10px;
 }
 
-.log .login,
-.log .logout {
-  background-color: #ff4f4f;
+.login-home,
+.logout-home {
+  background-color: #f20707;
   color: #fff;
   border: none;
   padding: 10px 20px;
@@ -148,17 +113,78 @@ footer {
   border-radius: 4px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   font-weight: bold;
+  text-decoration: none;
 }
 
-.log .login:hover,
-.log .logout:hover {
-  background-color: #ff3131;
+.login-home:hover,
+.logout-home:hover {
+  background-color: #f5efef;
+  color: #e61111;
 }
 
-.log .logout {
-  background-color: #333;
+.log-container {
+  display: inline-flex;
 }
 
-.log .logout:hover {
-  background-color: #222;
+.logout-home {
+  margin-right: 10px;
+  width: none;
 }
+
+.delete-home {
+  background-color: #f61707;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 1080px;
+  width: none;
+  font-size: 16px;
+  font-weight: 700;
+  transition: background-color 0.3s ease;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.delete-home:hover {
+  background-color: #ffffff;
+  color: #e61111;
+}
+
+
+
+/* Media Queries */
+
+/* For screens smaller than 768px */
+@media (max-width: 767px) {
+  .container {
+    margin-top: 40px;
+  }
+
+  .no-results {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .modal .modal-content {
+    width: 80%;
+  }
+}
+
+
+
+/* For screens smaller than 576px */
+@media (max-width: 575px) {
+  .no-results {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 1rem;
+    padding: 15px;
+  }
+
+  .modal .modal-content {
+    width: 90%;
+    padding: 10px;
+  }
+}
+

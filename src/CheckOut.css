@@ -75,3 +75,25 @@ section {
     letter-spacing: 2px;
   }
   
+  /* Media Queries */
+
+/* For screens smaller than 576px */
+@media (max-width: 575px) {
+  section {
+    width: 90%;
+  }
+}
+
+/* For screens smaller than 768px */
+@media (max-width: 767px) {
+  section {
+    width: 95%;
+  }
+}
+
+/* For screens smaller than 992px */
+@media (max-width: 991px) {
+  section {
+    width: 100%;
+  }
+}

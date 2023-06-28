@@ -34,7 +34,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  max-width: 80%;
+  max-width: 60%;
   max-height: 80%;
   margin: auto;
   padding: 2rem;
@@ -101,4 +101,66 @@
 
 .modal-info button:hover {
   background-color: #0066cc;
+}
+
+/* Media Queries */
+
+/* For screens smaller than 576px */
+@media (max-width: 575px) {
+  .modal {
+    max-width: 90%;
+    max-height: 90%;
+    padding: 1rem;
+  }
+
+  .modal img {
+    max-height: 50%;
+    margin-bottom: 0.5rem;
+  }
+
+  .modal-info h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .modal-info p {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .modal-info button {
+    font-size: 1rem;
+    padding: 0.4rem 0.8rem;
+    margin-top: 0.5rem;
+  }
+}
+
+/* For screens smaller than 768px */
+@media (max-width: 767px) {
+  .modal {
+    max-width: 90%;
+    max-height: 90%;
+    padding: 1rem;
+  }
+
+  .modal img {
+    max-height: 40%;
+    margin-bottom: 0.5rem;
+  }
+
+  .modal-info h2 {
+    font-size: 1.3rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .modal-info p {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .modal-info button {
+    font-size: 1rem;
+    padding: 0.4rem 0.8rem;
+    margin-top: 0.5rem;
+  }
 }

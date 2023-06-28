@@ -45,3 +45,27 @@
   font-size: 14px;
   color: #666;
 }
+
+/* Media Queries */
+
+/* For screens smaller than 576px */
+@media (max-width: 575px) {
+  .movie-card {
+    margin: 20px;
+    width: calc(50% - 40px);
+  }
+}
+
+/* For screens smaller than 768px */
+@media (max-width: 767px) {
+  .movie-card {
+    width: calc(33.33% - 40px);
+  }
+}
+
+/* For screens smaller than 992px */
+@media (max-width: 991px) {
+  .movie-card {
+    width: calc(25% - 40px);
+  }
+}

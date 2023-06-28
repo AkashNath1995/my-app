@@ -78,3 +78,45 @@ img {
 .login button:hover, .logout button:hover {
   background-color: #FF3E54;
 }
+
+/* Media Queries */
+
+/* For screens smaller than 576px */
+@media (max-width: 575px) {
+  nav {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .search-bar {
+    margin-top: 0.5rem;
+  }
+
+  .user-info {
+    margin-top: 0.5rem;
+  }
+}
+
+/* For screens smaller than 768px */
+@media (max-width: 767px) {
+  img {
+    width: 150px;
+    height: 150px;
+  }
+
+  .search-bar input[type="text"] {
+    width: 12rem;
+  }
+}
+
+/* For screens smaller than 992px */
+@media (max-width: 991px) {
+  img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .search-bar input[type="text"] {
+    width: 10rem;
+  }
+}

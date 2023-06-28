@@ -138,5 +138,42 @@
     border-radius: 50px; /* adjust this value to control the degree of curvature */
   }
   
-  
-  
+  /* For screens smaller than 768px */
+@media (max-width: 767px) {
+  .seat {
+    font-size: 12px;
+    width: 24px;
+    height: 20px;
+    margin-right: 4px;
+    margin-left: 4px;
+  }
+
+  .box {
+    height: 40px;
+    width: 200px;
+  }
+
+  .screen {
+    height: 20px;
+  }
+}
+
+/* For screens smaller than 992px */
+@media (max-width: 991px) {
+  .seat {
+    font-size: 10px;
+    width: 18px;
+    height: 16px;
+    margin-right: 3px;
+    margin-left: 3px;
+  }
+
+  .box {
+    height: 30px;
+    width: 150px;
+  }
+
+  .screen {
+    height: 16px;
+  }
+}
