@@ -32,7 +32,9 @@ function App() {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
   const history = useHistory();
+  
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -60,6 +62,7 @@ function App() {
       );
       const data = await response.json();
       setMovies(data.results);
+      console.log('Fetched movies:', data.results); 
       setFilteredMovies(data.results);
       setLoading(false);
     };
@@ -165,6 +168,21 @@ function App() {
     setFilteredMovies(sortedMovies);
   }
   
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const handleSearch = () => {
+  let filtered = movies;
+  if (searchQuery.trim() !== '') {
+    const query = searchQuery.trim().toLowerCase();
+    filtered = filtered.filter((movie) =>
+      movie.title.toLowerCase().includes(query)
+    );
+  }
+  setFilteredMovies(filtered);
+};
+
 
   return (
     <div className="App">
@@ -185,6 +203,15 @@ function App() {
           </Link>
         )}
       </nav>
+      <div className="search-bar">
+            <input
+              type="text"
+              placeholder="Search by movie name"
+              value={searchQuery}
+              onChange={handleSearchChange}
+            />
+            <button className="search-bar-btn"onClick={handleSearch}>Search</button>
+          </div>
 
       <div className="container">
         <div className="genres">

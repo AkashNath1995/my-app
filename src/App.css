@@ -209,6 +209,43 @@ body {
   background-color: transparent;
 }
 
+.search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin:none ;
+}
+
+.search-bar input{
+  margin:10px;
+  outline:none;
+}
+
+.search-bar input:hover{
+
+  outline:solid red;
+}
+
+.search-bar-btn{
+  margin: none;
+  padding: 8px 16px;
+  background-color: #f90909;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.search-bar-btn:hover {
+  background-color: #ffffff;
+  color: #e61111;
+}
+
+
+
+
+
 
 
 /* Media Queries */
