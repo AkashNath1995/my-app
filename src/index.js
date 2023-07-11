@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import App from './App';
 import LoginPage from './components/login';
 import RegistrationPage from './components/registration';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 ReactDOM.render(
   <Router>

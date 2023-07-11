@@ -1,26 +1,15 @@
 import React, { useState } from 'react';
 import './MovieCard.css';
 
-const MovieCard = ({ movie, handleMovieClick, handleAddToFavorites }) => {
-  const [isFavorite, setIsFavorite] = useState(false);
+const MovieCard = ({ movie, handleMovieClick}) => {
 
-  const handleFavoriteClick = (e) => {
-    e.stopPropagation(); // Prevent the click event from propagating to the parent container
-    setIsFavorite(!isFavorite);
-    handleAddToFavorites(movie);
+  const handleClick = () => {
+    handleMovieClick(movie);
   };
 
   return (
-    <div className='movie-card' onClick={() => handleMovieClick(movie)}>
-      {isFavorite ? (
-        <div className="favorite-icon" onClick={handleFavoriteClick}>
-          <i className="fas fa-heart"></i>
-        </div>
-      ) : (
-        <div className="favorite-icon" onClick={handleFavoriteClick}>
-          <i className="far fa-heart"></i>
-        </div>
-      )}
+    <div className='movie-card' onClick={handleClick}>
+
       <img
         src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
         alt={`${movie.title} Poster`}

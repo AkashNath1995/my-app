@@ -245,7 +245,12 @@ body {
 
 
 
-
+.not-found {
+  color: red;
+  text-align: center;
+  font-size: xx-large;
+  font-weight: 700;
+}
 
 
 /* Media Queries */

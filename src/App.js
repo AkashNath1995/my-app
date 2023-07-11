@@ -145,7 +145,6 @@ function App() {
     try {
       await deleteUser(auth.currentUser);
       // Account deletion successful
-      console.log('User account deleted');
     } catch (error) {
       // Account deletion failed
       console.error(error.message);
@@ -183,7 +182,6 @@ function App() {
   setFilteredMovies(filtered);
 };
 
-
   return (
     <div className="App">
       <nav className="navbar">
@@ -203,6 +201,9 @@ function App() {
           </Link>
         )}
       </nav>
+      <div>
+        <incrementCount/>
+      </div>
       <div className="search-bar">
             <input
               type="text"
@@ -246,7 +247,7 @@ function App() {
                   ))}
                 </div>
               ) : (
-                <p>No movies found.</p>
+                <p className="not-found">No movies found.</p>
               )}
             </>
           )}
