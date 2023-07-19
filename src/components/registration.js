@@ -91,7 +91,7 @@ function RegistrationPage() {
       <form onSubmit={handleRegistration}>
         <div>
           <label className="reg-label">Email:</label>
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="example@example.com"/>
           {emptyEmailError && <p className="error-message">Email should not be empty.</p>}
           {invalidEmailError && <p className="error-message">Invalid email address.</p>}
           {emailInUseError && <p className="error-message">Email is already in use.</p>}

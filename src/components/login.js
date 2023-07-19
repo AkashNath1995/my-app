@@ -67,12 +67,12 @@ function LoginPage() {
       <form onSubmit={handleLogin}>
         <div>
           <label className="login-label">Email:</label>
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="example@example.com"/>
           {emptyEmailError && <p className="error-message">Email should not be empty.</p>}
         </div>
         <div>
           <label className="login-label">Password:</label>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
           {emptyPasswordError && <p className="error-message">Password should not be empty.</p>}
         </div>
         {error && <p className="error-message">{error}</p>}
