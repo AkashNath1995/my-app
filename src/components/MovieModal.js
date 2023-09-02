@@ -32,7 +32,7 @@ const MovieModal = ({ movie, handleCloseModal }) => {
         <div className="modal-info">
           <h2>{title}</h2>
           <p>{overview}</p>
-          <button onClick={handleBookNow}>Book Now</button>
+          <button onClick={handleBookNow}>Book Now</button><br/><br/>
         </div>
         {showSeatSelection && (
           <SeatSelection movie={movie} handleClose={handleCloseModal} />
